@@ -30,17 +30,19 @@ public class PingController(IMediator mediator) : ControllerBase
     }
 
     [HttpPost("validation")]
-    public async Task<IActionResult> PingValidation(PingCommand command, [FromServices] IValidator<PingCommand> validator)
+    public async Task<IActionResult> PingValidation(
+        PingCommand command,
+        [FromServices] IValidator<PingCommand> validator
+    )
     {
         // validation, can be abstracted away using filters or via a MediatR behavior
         var validationResult = await validator.ValidateAsync(command);
-        if (!validationResult.IsValid) return BadRequest(validationResult.ToDictionary());
+        if (!validationResult.IsValid)
+            return BadRequest(validationResult.ToDictionary());
 
         // mediator
         var response = await mediator.Send(command);
 
         return Ok(response);
     }
-
-
 }
