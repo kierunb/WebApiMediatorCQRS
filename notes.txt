@@ -27,3 +27,6 @@ https://www.milanjovanovic.tech/blog/cqrs-validation-with-mediatr-pipeline-and-f
 
 // REPR pattern with Reprise
 https://github.com/yavorfingarov/Reprise
+
+Samples and articles:
+https://codewithmukesh.com/blog/cqrs-and-mediatr-in-aspnet-core/
