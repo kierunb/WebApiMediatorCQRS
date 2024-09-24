@@ -16,14 +16,18 @@ public class PingCommandValidator : AbstractValidator<PingCommand>
         RuleFor(x => x.Message).NotEmpty().Must(IsValidMessage);
     }
 
-    private bool IsValidMessage(string message) => !string.IsNullOrWhiteSpace(message) && message.Length >= 3;
+    private bool IsValidMessage(string message) =>
+        !string.IsNullOrWhiteSpace(message) && message.Length >= 3;
 }
 
 public record PingCommandResponse(string Message);
 
 public class PingCommandHandler : IRequestHandler<PingCommand, PingCommandResponse>
 {
-    public Task<PingCommandResponse> Handle(PingCommand request, CancellationToken cancellationToken)
+    public Task<PingCommandResponse> Handle(
+        PingCommand request,
+        CancellationToken cancellationToken
+    )
     {
         return Task.FromResult(new PingCommandResponse(request.Message));
     }

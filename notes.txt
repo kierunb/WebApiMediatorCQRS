@@ -15,6 +15,7 @@ Nugets:
 https://github.com/jbogard/MediatR
 https://docs.fluentvalidation.net/en/latest/
 https://docs.automapper.org/en/latest/index.html
+https://github.com/yavorfingarov/Reprise
 
 
 // integrating fluent validation with with ASP.NET Core
@@ -23,3 +24,6 @@ https://github.com/SharpGrip/FluentValidation.AutoValidation
 
 // integrating fluent validation with MediatR
 https://www.milanjovanovic.tech/blog/cqrs-validation-with-mediatr-pipeline-and-fluentvalidation
+
+// REPR pattern with Reprise
+https://github.com/yavorfingarov/Reprise
