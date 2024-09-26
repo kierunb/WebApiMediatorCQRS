@@ -2,7 +2,7 @@
 
 namespace WebApiMediatorCQRS.Endpoints;
 
-[Endpoint]
+    
 public class HelloEndpoint
 {
     [Get("repr/hello")]
