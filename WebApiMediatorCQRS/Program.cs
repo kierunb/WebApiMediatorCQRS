@@ -7,7 +7,8 @@ using WebApiMediatorCQRS.Handlers;
 var domainAssembly = typeof(Program).Assembly;
 var builder = WebApplication.CreateBuilder(args);
 
-builder.AddServiceDefaults(); // Aspire configuration
+// Aspire configuration: Logging, Metrics, Traces, HealthChecks, Service Discovery, Resilience
+builder.AddServiceDefaults(); 
 
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
 builder.Services.AddProblemDetails();
