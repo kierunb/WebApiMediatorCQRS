@@ -32,7 +32,7 @@ public class PingValidatedEndpoint
 
         var validationResult = await validator.ValidateAsync(request);
         if (!validationResult.IsValid)
-            return Results.BadRequest(validationResult.ToDictionary());
+            return Results.ValidationProblem(validationResult.ToDictionary());
 
         return Results.Ok(await mediator.Send(mapper.Map<PingCommand>(request)));
     }
