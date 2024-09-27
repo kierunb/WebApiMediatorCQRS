@@ -2,7 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.OutputCaching;
 using Reprise;
-using WebApiMediatorCQRS.Commands;
+using WebApiMediatorCQRS.Queries;
 
 namespace WebApiMediatorCQRS.Endpoints;
 
@@ -17,15 +17,15 @@ public class GetCustomerByIdEndpoint
     public static async Task<IResult> Handle(
         string id,
         IMediator mediator,
-        IValidator<GetCustomerByIdCommand> validator
+        IValidator<GetCustomerByIdQuery> validator
     )
     {
         // manual validation or enable ValidationBehavior
-        var validationResult = await validator.ValidateAsync(new GetCustomerByIdCommand(id));
+        var validationResult = await validator.ValidateAsync(new GetCustomerByIdQuery(id));
         if (!validationResult.IsValid)
             return Results.ValidationProblem(validationResult.ToDictionary());
 
-        var response = await mediator.Send(new GetCustomerByIdCommand(id));
+        var response = await mediator.Send(new GetCustomerByIdQuery(id));
         if (response == null)
             return Results.NotFound();
 

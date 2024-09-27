@@ -5,19 +5,19 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using WebApiMediatorCQRS.Database;
 
-namespace WebApiMediatorCQRS.Commands;
+namespace WebApiMediatorCQRS.Queries;
 
-public record GetCustomerByIdCommand(string Id) : IRequest<GetCustomerByIdCommandResponse>;
+public record GetCustomerByIdQuery(string Id) : IRequest<GetCustomerByIdQueryResponse>;
 
-public class GetCustomerByIdCommandValidator : AbstractValidator<GetCustomerByIdCommand>
+public class GetCustomerByIdQueryValidator : AbstractValidator<GetCustomerByIdQuery>
 {
-    public GetCustomerByIdCommandValidator()
+    public GetCustomerByIdQueryValidator()
     {
         RuleFor(x => x.Id).Length(5);
     }
 }
 
-public record GetCustomerByIdCommandResponse
+public record GetCustomerByIdQueryResponse
 {
     public string CustomerId { get; set; }
 
@@ -46,21 +46,21 @@ public class GetCustomerByIdCommandHandler(
     ILogger<GetCustomerByIdCommandHandler> logger,
     IMapper mapper,
     NorthwindContext northwindContext
-) : IRequestHandler<GetCustomerByIdCommand, GetCustomerByIdCommandResponse?>
+) : IRequestHandler<GetCustomerByIdQuery, GetCustomerByIdQueryResponse?>
 {
-    public async Task<GetCustomerByIdCommandResponse?> Handle(
-        GetCustomerByIdCommand request,
+    public async Task<GetCustomerByIdQueryResponse?> Handle(
+        GetCustomerByIdQuery request,
         CancellationToken cancellationToken
     )
     {
         logger.LogInformation(
             "Handling {type}, Id: {id}",
-            typeof(GetCustomerByIdCommand).Name,
+            typeof(GetCustomerByIdQuery).Name,
             request.Id
         );
 
         return await northwindContext
-            .Customers.ProjectTo<GetCustomerByIdCommandResponse>(mapper.ConfigurationProvider)
+            .Customers.ProjectTo<GetCustomerByIdQueryResponse>(mapper.ConfigurationProvider)
             .FirstOrDefaultAsync(x => x.CustomerId == request.Id, cancellationToken);
     }
 }
