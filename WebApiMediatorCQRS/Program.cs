@@ -3,6 +3,9 @@ using Reprise;
 using WebApiMediatorCQRS.Behaviors;
 using WebApiMediatorCQRS.Database;
 using WebApiMediatorCQRS.Handlers;
+using WebApiMediatorCQRS.Commands;
+using WebApiMediatorCQRS.Validators;
+using WebApiMediatorCQRS.Profiles;
 
 var domainAssembly = typeof(Program).Assembly;
 var builder = WebApplication.CreateBuilder(args);
@@ -43,9 +46,11 @@ builder.Services.AddMediatR(cfg =>
 
 // FluentValidation
 builder.Services.AddValidatorsFromAssembly(domainAssembly);
+builder.Services.AddTransient<IValidator<AddOrderCommand>, OrderValidator>();
 
 // AutoMapper
 builder.Services.AddAutoMapper(domainAssembly);
+builder.Services.AddAutoMapper(typeof(OrderProfile));
 
 // Reprise
 builder.ConfigureServices();
