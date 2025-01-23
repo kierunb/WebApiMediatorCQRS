@@ -3,6 +3,7 @@ using Reprise;
 using WebApiMediatorCQRS.Behaviors;
 using WebApiMediatorCQRS.Database;
 using WebApiMediatorCQRS.Handlers;
+using WebApiMediatorCQRS.Commands;
 
 var domainAssembly = typeof(Program).Assembly;
 var builder = WebApplication.CreateBuilder(args);
