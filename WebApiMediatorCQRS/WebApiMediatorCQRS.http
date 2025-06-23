@@ -1,5 +1,35 @@
 @WebApiMediatorCQRS_HostAddress = http://localhost:5039
 
+### Create Order - Complete Example
+POST {{WebApiMediatorCQRS_HostAddress}}/orders
+Content-Type: application/json
 
+{
+  "customerId": "ALFKI",
+  "employeeId": 1,
+  "requiredDate": "2025-12-31T00:00:00Z",
+  "shipName": "Test Ship Name",
+  "shipAddress": "123 Test Street",
+  "shipCity": "Test City",
+  "shipCountry": "Test Country"
+}
+
+### Create Order - Minimal Example
+POST {{WebApiMediatorCQRS_HostAddress}}/orders
+Content-Type: application/json
+
+{
+  "customerId": "ALFKI"
+}
+
+### Create Order - Validation Test (Should Fail)
+POST {{WebApiMediatorCQRS_HostAddress}}/orders
+Content-Type: application/json
+
+{
+  "customerId": "ABC",
+  "freight": -10,
+  "requiredDate": "2020-01-01T00:00:00Z"
+}
 
 ###
